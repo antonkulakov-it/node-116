@@ -16,7 +16,10 @@ app.get('/data/:id', function(req, res, next) {
 
 app.post('/data/:id', function(req, res, next) {
     const id = req.params.id;
-    dataHash[id] = req.body;
+    if (!dataHash[id]) {
+        dataHash[id] = [];
+    }
+    dataHash[id].push(req.body);
     console.log(dataHash)
     res.json(dataHash[id]);
 });
